@@ -749,7 +749,10 @@ class Manage:
         t.info_download_station = ''
         t.submenu = ManageMenu()
 
-        if re.search('localhost', sickbeard.TORRENT_HOST):
+        if (sickbeard.TRANSMISSION_WEB_HOME != ''):
+            t.webui_url = sickbeard.TRANSMISSION_WEB_HOME
+        
+        elif re.search('localhost', sickbeard.TORRENT_HOST):
 
             if sickbeard.LOCALHOST_IP == '':
                 t.webui_url = re.sub('localhost', helpers.get_lan_ip(), sickbeard.TORRENT_HOST)
@@ -1028,7 +1031,7 @@ class ConfigSearch:
                     sab_apikey=None, sab_category=None, sab_host=None, nzbget_username=None, nzbget_password=None, nzbget_category=None, nzbget_host=None, nzbget_use_https=None,
                     nzb_method=None, torrent_method=None, usenet_retention=None, search_frequency=None, download_propers=None, allow_high_priority=None,
                     torrent_dir=None, torrent_username=None, torrent_password=None, torrent_host=None, torrent_label=None, torrent_path=None,
-                    torrent_ratio=None, torrent_paused=None, torrent_high_bandwidth=None, ignore_words=None):
+                    torrent_ratio=None, torrent_paused=None, torrent_high_bandwidth=None, ignore_words=None, torrent_web_home=None):
 
         results = []
 
@@ -1077,6 +1080,7 @@ class ConfigSearch:
         sickbeard.TORRENT_PAUSED = config.checkbox_to_value(torrent_paused)
         sickbeard.TORRENT_HIGH_BANDWIDTH = config.checkbox_to_value(torrent_high_bandwidth)
         sickbeard.TORRENT_HOST = config.clean_url(torrent_host)
+        sickbeard.TRANSMISSION_WEB_HOME = config.clean_url(torrent_web_home)
 
         sickbeard.save_config()
 

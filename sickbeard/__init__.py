@@ -279,6 +279,7 @@ NZBGET_USE_HTTPS = False
 TORRENT_USERNAME = None
 TORRENT_PASSWORD = None
 TORRENT_HOST = ''
+TRANSMISSION_WEB_HOME = ''
 TORRENT_PATH = ''
 TORRENT_RATIO = ''
 TORRENT_PAUSED = False
@@ -460,7 +461,7 @@ def initialize(consoleLogging=True):
                 USE_NZBS, USE_TORRENTS, NZB_METHOD, NZB_DIR, DOWNLOAD_PROPERS, ALLOW_HIGH_PRIORITY, TORRENT_METHOD, \
                 SAB_USERNAME, SAB_PASSWORD, SAB_APIKEY, SAB_CATEGORY, SAB_HOST, \
                 NZBGET_USERNAME, NZBGET_PASSWORD, NZBGET_CATEGORY, NZBGET_HOST, NZBGET_USE_HTTPS, currentSearchScheduler, backlogSearchScheduler, \
-                TORRENT_USERNAME, TORRENT_PASSWORD, TORRENT_HOST, TORRENT_PATH, TORRENT_RATIO, TORRENT_PAUSED, TORRENT_HIGH_BANDWIDTH, TORRENT_LABEL, \
+                TORRENT_USERNAME, TORRENT_PASSWORD, TORRENT_HOST, TRANSMISSION_WEB_HOME, TORRENT_PATH, TORRENT_RATIO, TORRENT_PAUSED, TORRENT_HIGH_BANDWIDTH, TORRENT_LABEL, \
                 USE_XBMC, XBMC_NOTIFY_ONSNATCH, XBMC_NOTIFY_ONDOWNLOAD, XBMC_NOTIFY_ONSUBTITLEDOWNLOAD, XBMC_UPDATE_FULL, XBMC_UPDATE_ONLYFIRST, \
                 XBMC_UPDATE_LIBRARY, XBMC_HOST, XBMC_USERNAME, XBMC_PASSWORD, \
                 USE_TRAKT, TRAKT_USERNAME, TRAKT_PASSWORD, TRAKT_API, TRAKT_REMOVE_WATCHLIST, TRAKT_USE_WATCHLIST, TRAKT_METHOD_ADD, TRAKT_START_PAUSED, traktWatchListCheckerSchedular, \
@@ -746,6 +747,7 @@ def initialize(consoleLogging=True):
         TORRENT_USERNAME = check_setting_str(CFG, 'TORRENT', 'torrent_username', '')
         TORRENT_PASSWORD = check_setting_str(CFG, 'TORRENT', 'torrent_password', '')
         TORRENT_HOST = check_setting_str(CFG, 'TORRENT', 'torrent_host', '')
+        TRANSMISSION_WEB_HOME = check_setting_str(CFG,'TORRENT', 'torrent_web_home', '')
         TORRENT_PATH = check_setting_str(CFG, 'TORRENT', 'torrent_path', '')
         TORRENT_RATIO = check_setting_str(CFG, 'TORRENT', 'torrent_ratio', '')
         TORRENT_PAUSED = bool(check_setting_int(CFG, 'TORRENT', 'torrent_paused', 0))
@@ -1470,6 +1472,8 @@ def save_config():
     new_config['TORRENT']['torrent_username'] = TORRENT_USERNAME
     new_config['TORRENT']['torrent_password'] = helpers.encrypt(TORRENT_PASSWORD, ENCRYPTION_VERSION)
     new_config['TORRENT']['torrent_host'] = TORRENT_HOST
+    new_config['TORRENT']['torrent_web_home'] = TRANSMISSION_WEB_HOME
+    
     new_config['TORRENT']['torrent_path'] = TORRENT_PATH
     new_config['TORRENT']['torrent_ratio'] = TORRENT_RATIO
     new_config['TORRENT']['torrent_paused'] = int(TORRENT_PAUSED)
